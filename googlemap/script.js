@@ -1,34 +1,18 @@
 function initMap() {
 
-	var broadway = {
-		info: '<strong>Chipotle on Broadway</strong><br>\
-					5224 N Broadway St<br> Chicago, IL 60640<br>\
-					<a href="https://goo.gl/maps/jKNEDz4SyyH2">Get Directions</a>',
-		lat: 41.976816,
-		long: -87.659916
-	};
-
-	var belmont = {
-		info: '<strong>Chipotle on Belmont</strong><br>\
-					1025 W Belmont Ave<br> Chicago, IL 60657<br>\
-					<a href="https://goo.gl/maps/PHfsWTvgKa92">Get Directions</a>',
-		lat: 41.939670,
-		long: -87.655167
-	};
-
-	var sheridan = {
-		info: '<strong>Chipotle on Sheridan</strong><br>\r\
-					6600 N Sheridan Rd<br> Chicago, IL 60626<br>\
-					<a href="https://goo.gl/maps/QGUrqZPsYp92">Get Directions</a>',
-		lat: 42.002707,
-		long: -87.661236
-	};
+	var QU8641 = { info: '<strong>Free - Up to 25 mbs Wi-Fi Service located at Indoor AP - Community Center - Computer Rm</strong>', Lat: 40.755727, Long: -73.944583};
+	var QU8642 = { info: '<strong>Free - Up to 25 mbs Wi-Fi Service located at Indoor AP - Queens Public Library</strong>', Lat: 40.755333, Long: -73.944131};
+	var QU8643 = { info: '<strong>Free - Up to 25 mbs Wi-Fi Service located at Indoor AP - North Management Office</strong>', Lat: 40.755751, Long: -73.945166};
+	var QU8644 = { info: '<strong>Free - Up to 25 mbs Wi-Fi Service located at Indoor AP - North Management Office</strong>', Lat: 40.755751, Long: -73.945166};
+	var QU8645 = { info: '<strong>Free - Up to 25 mbs Wi-Fi Service located at Indoor AP - North Maintenance Area</strong>', Lat: 40.755751, Long: -73.945166};
 
 	var locations = [
-      [broadway.info, broadway.lat, broadway.long, 0],
-      [belmont.info, belmont.lat, belmont.long, 1],
-      [sheridan.info, sheridan.lat, sheridan.long, 2],
-    ];
+    [QU8641.info, QU8641.lat, QU8641.long, 0],
+	[QU8642.info, QU8642.lat, QU8642.long, 1],
+	[QU8643.info, QU8643.lat, QU8643.long, 2],
+	[QU8644.info, QU8644.lat, QU8644.long, 3],
+	[QU8645.info, QU8645.lat, QU8645.long, 4],
+    	];
 
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 13,
