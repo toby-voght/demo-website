@@ -33,12 +33,12 @@
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
+  var central = {lat: 40.7829, lng: -73.9654};
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
+      document.getElementById('map'), {zoom: 4, center: central});
   // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
+  var marker = new google.maps.Marker({position: central, map: map});
 }
     </script>
     <script async defer
@@ -46,7 +46,7 @@ function initMap() {
     </script>
   </body>
 </html>
-    
+
     <div id="map"></div>
   </body>
 </html>
