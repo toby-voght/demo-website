@@ -9,12 +9,14 @@ function initMap() {
 	var QU8642 = { 
 		info: '<strong>Free - Up to 25 mbs Wi-Fi Service located at Indoor AP - Queens Public Library</strong>', 
 		Lat: 40.755333, 
-		Long: -73.944131};
+		Long: -73.944131
+	};
 
 	var QU8643 = { 
 		info: '<strong>Free - Up to 25 mbs Wi-Fi Service located at Indoor AP - North Management Office</strong>', 
 		Lat: 40.755751, 
-		Long: -73.945166};
+		Long: -73.945166
+	};
 
 	var locations = [
       [QU8641.info, QU8641.lat, QU8641.long, 0],
