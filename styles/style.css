@@ -1,5 +1,5 @@
 html {
-  font-size: 10px;
+  font-size: 20px;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -39,3 +39,50 @@ img {
   display: block;
   margin: 0 auto;
 }
+
+// transferred from the index.html cut 1
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+
+.column {
+  float: left;
+  width: 70%;
+  padding: 10px;
+  height: 300px; 
+}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+// transferred from the index.html cut 2
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+
+.column {
+  float: left;
+  width: 70%;
+  padding: 10px;
+  height: 300px; 
+}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
