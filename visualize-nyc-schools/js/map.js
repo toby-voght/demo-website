@@ -98,8 +98,8 @@ function schoolToKey() {
         return "grade";
     if (schoolName == "Regent Score")
         return "regents";
-    if (schoolName == "SAT Scores")
-        return "sat";
+    if (schoolName == "Free or Limited Free")
+        return "free";
     return "";
 }
 
@@ -124,7 +124,7 @@ function envToKey() {
  */
 
 function color(property) {
-  if (property == "LOW" || property == "D" || property == "F")
+  if (property == "LOW" || property == "D" || property == "F" || property == "Limited")
     { return schLow; }
   else if (property == "MED" || property == "B" || property == "C")
     { return schMed; }
@@ -172,7 +172,7 @@ d3.select("#regents").on("click", function() {
 });
 
 d3.select("#sat").on("click", function() {
-    colorSchools('SAT Scores', 'SAT');
+    colorSchools('Free or Limited Free', 'SAT');
 });
 
 function colorSchools(name, key) {
@@ -254,9 +254,8 @@ function toTitleCase(str)
 
 var circle_r = 5;
 function plotSchools() {
-    d3.json("json/schools_trim_merged.json", function(error, school) {
+    d3.json("json/Clean_NYC_WiFi.json", function(error, school) {
         var mouseDuration = 150;
-
         smap.selectAll(".school")
             .data(school.features)
             .enter().append("circle")
@@ -277,16 +276,18 @@ function plotSchools() {
                 .style("height", "90px");
 
                 var toolText = toTitleCase(d.properties.SCHOOLNAME)
-                if (d.properties.SAT_RAW != "<NA>" && d.properties.SAT_RAW != "null" && d.properties.SAT_RAW != "NaN") {
-                    toolText += "<br /> The average SAT score is " + d.properties.SAT_RAW; 
+                if (d.properties.TYPE_WiFi != "<NA>" && d.properties.TYPE_WiFi != "null" && d.properties.TYPE_WiFi != "NaN") {
+                    toolText += "<br /> This WiFi hotspot is " + d.properties.TYPE_WiFi; 
                 }
                 if (d.properties.GRADE != "<NA>" && d.properties.GRADE != "null" && d.properties.GRADE != "NaN") {
-                    toolText += "<br /> Progress Report Grade is " + d.properties.GRADE;
+                    toolText += "<br /> Provider is " + d.properties.GRADE;
                 }
-                if (d.properties.GRAD_RAW != "<NA>" && d.properties.GRAD_RAW != "null" && d.properties.GRAD_RAW != "NaN") {
-                    toolText += "<br /> The graduation rate is " + Math.round(d.properties.GRAD_RAW * 100) + "%";
+                if (d.properties.GRAD_RAW == "Indoor" || d.properties.GRAD_RAW == "Library") {
+                    toolText += "<br /> The hotspot is indoors";
                 }
-
+                if (d.properties.GRAD_RAW == "Outdoor" || d.properties.GRAD_RAW == "Outdoor Kiosk") {
+                    toolText += "<br /> The hotspot is outdoors"
+                }
 
                 div.html(toolText);
             })
