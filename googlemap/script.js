@@ -1,3 +1,7 @@
+//I really enjoyed doing this. It's a monster of a Java script and I am sure there are simpler ways to solve the same issue but this is the way I figured out how to make it work, and it works!
+//This visualization took me aproximately 4 to 5 hours and it was worth every second. One more interesting aspect is that as big as it is, it runs smoothly so no impact to the user on my clumsiness.
+//There is a lot of data processing to get it to do what it does and I had to do it concatenating strings in excell as I felt more comfortable with my skills in that app.
+
 function initMap() {
 
 var QU8641 = { info: '<strong>Free - Up to 25 mbs Wi-Fi Service located at Indoor AP - Community Center - Computer Rm</strong><br>\"10-25 41 AVENUE"<br>\<a href=https://www.google.com/maps/search/10-25-41-AVENUE+11101----">Take me there!</a>', lat: 40.755727, long: -73.944583};
