@@ -172,7 +172,7 @@ d3.select("#regents").on("click", function() {
 });
 
 d3.select("#sat").on("click", function() {
-    colorSchools('Free or Limited Free', 'SAT');
+    colorSchools('Free or Limited Free', 'Free');
 });
 
 function colorSchools(name, key) {
