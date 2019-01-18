@@ -124,11 +124,11 @@ function envToKey() {
  */
 
 function color(property) {
-  if (property == "LOW" || property == "D" || property == "F" || property == "Limited")
+  if (property == "LOW" || property == "Transit Wireless")
     { return schLow; }
-  else if (property == "MED" || property == "B" || property == "C")
+  else if (property == "MED" || property == "SPECTRUM")
     { return schMed; }
-  else if (property == "HIGH" || property == "A")
+  else if (property == "HIGH" || property == "LinkNYC - Citybridge")
     { return schHigh; }
   else
     return schNa;
