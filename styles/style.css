@@ -30,10 +30,11 @@ body {
 
 h1 {
   margin: 0;
-  padding: 20px 0;  
+  padding: 30px 0;  
   color: #00539F;
-  text-shadow: 3px 3px 1px black;
+  text-shadow: 1px 1px 1px black;
 }
+
 
 img {
   display: block;
