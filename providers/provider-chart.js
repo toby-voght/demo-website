@@ -22,7 +22,10 @@ d3.json("provider.json", function(error, data) {
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("class", "chart")
+    .attr("id", "wifi-chart");
+
 
   var x = d3.scale.linear()
     .range([0, width])

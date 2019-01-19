@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+  <title>About Visualize NYC Schools</title>
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/schools.css" rel="stylesheet">
+  <link href="css/non-responsive.css" rel="stylesheet">
+  </head>
+
+  <body>
+  <!-- Fixed navbar -->
+    <div class="container">
+      <header>
+        <aside>
+          <a href = "index.html">Visualize New York Schools</a> 
+        </aside>
+        <aside>
+          <a href="findings.html">Our Findings</a>
+        </aside>
+          About Us
+      </header>
+
+      <h1>About Us</h1>
+      <h2>Our Project</h2>
+      <p">Visualize NYC schools is a tool for people interested in seeing the environment surrounding the most successful NYC public schools and those that are lagging behind. We think of a school's enviroment as consisting of the actions and demographics of people within its geographic school district. For example, the map shows the number of students enrolled in the district, the percentage of people receiving public assistance, and graffiti reports. Visualize NYC Schools is designed largely with use by policymakers and parents in mind. Parents can see in which districts schools are suceeding when planning in which neighborhood to raise their children. Policymakers can see which environmental factors are related to school success and which are not-- the answers may be suprising. </p>
+      <p>To learn about the environment of NYC public schools yourself, why don't you <a href = "index.html">play with it yourself</a> or <a href = findings.html>read our analysis</a>?</p>
+      <h2>Where does the data come from?</h2>
+      <p>Our data comes from the <a href = 'http://schools.nyc.gov/Accountability/default.htm'> NYC Department of Education </a> and <a href = "https://nycopendata.socrata.com/data?cat=education"> NYC Open Data </a> Specifically, we used the following data sets:</p>
+      <li><a href = 'https://nycopendata.socrata.com/Education/SAT-Results/f9bf-2cp4?'> SAT Scores </a> </li>
+      <li> <a href = 'https://data.cityofnewyork.us/Education/Graduation-Outcomes-Class-Of-2010-Regents-based-Ma/k8hv-56d7'> Graduation Rates and Regents Scores</a></li>
+      <li> <a href = 'http://schools.nyc.gov/Accountability/tools/report/default.htm'> School Progress Report </a> </li>
+      <li> <a href = 'https://data.cityofnewyork.us/Social-Services/graffiti/f3qa-vq2v'> Graffiti Reports </a></li>
+      <li> <a href = 'https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9'> Noise Complaints </a></li>
+      <li> <a href = 'https://data.cityofnewyork.us/Education/School-Attendance-and-Enrollment-Statistics-by-Dis/7z8d-msnt'> School Attendence and Enrollment </a></li>
+      <li> <a href = 'https://data.cityofnewyork.us/Social-Services/Percentage-of-People-Residing-in-a-School-District/vbvy-nght'> People Receiving Public Assistance </a></li>
+      <li><a href = 'http://www.nyc.gov/html/dcp/html/bytes/dwndistricts.shtml'>Shape Files for the Maps </a></li>
+      <h2>How was this done?</h2>
+      <p>The visualization for this project was done using <a href = 'http://d3js.org/'>D3.js</a>. The shapefiles from the city were very big (and very laggy!) and were not in the correct format for D3, so we compressed them and converted them using <a href = 'http://www.qgis.org/en/site/'>qgis</a>. For more instructions on how to do this visit our <a href = 'https://github.com/stepzhou/visualize-nyc-schools'> github </a></p>
+      <p>The colors of the data points for the schools and the colors for the districts were determined by the 66th and 33rd percentiles. The color information was merged with a json file with the coordinates of the points or the outline of the shapes.</p>
+      <h2>Why was this done?</h2>
+      <p>This is a final project for <a href = 'http://columbiadatascience.com/'>Intro to Data Science</a> at Columbia University. The project members are George Tsai, Hannah Keiler, Jeremy Meyers, and Stephen Zhou. We were excited by the amount of data available on the New York Open Data website and wanted to do a project that used many of these data sets to provide insight one couldn't gather from the individual data sets alone. We are all students, so education is near and dear to our hearts. </p>
+  </body>
+</html>
