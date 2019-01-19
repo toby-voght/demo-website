@@ -90,14 +90,10 @@ function displayInfo() {
 // Converting category names to csv key name
 function schoolToKey() {
     var schoolName = $("#groupby").text().trim();
-    if (schoolName == "Cluster")
-        return "cluster";
     if (schoolName == "Graduation Rate")
         return "gradrate";
     if (schoolName == "Grade")
         return "grade";
-    if (schoolName == "Regent Score")
-        return "regents";
     if (schoolName == "Free or Limited Free")
         return "free";
     return "";
