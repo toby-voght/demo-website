@@ -27,7 +27,7 @@ var envLegendData = [
 
 var schLow = "#FF2C00",
     schMed = "#FFDE00",
-    schHigh = "00B945",
+    schHigh = "green",
     schNa = "gray";
 
 var schLegendData = [
@@ -90,14 +90,10 @@ function displayInfo() {
 // Converting category names to csv key name
 function schoolToKey() {
     var schoolName = $("#groupby").text().trim();
-    if (schoolName == "Cluster")
-        return "cluster";
     if (schoolName == "Graduation Rate")
         return "gradrate";
     if (schoolName == "Grade")
         return "grade";
-    if (schoolName == "Regent Score")
-        return "regents";
     if (schoolName == "Free or Limited Free")
         return "free";
     return "";
@@ -155,20 +151,12 @@ d3.select("#none").on("click", function() {
     displayInfo();
 });
 
-d3.select("#cluster").on("click", function() {
-    colorSchools('Cluster', 'CLUSTER');
-});
-
 d3.select("#gradrate").on("click", function() {
     colorSchools('Graduation Rate', 'GRADRATE');
 });
 
 d3.select("#grade").on("click", function() {
     colorSchools('Grade', 'GRADE');
-});
-
-d3.select("#regents").on("click", function() {
-    colorSchools('Regent Score', 'REGENTS');
 });
 
 d3.select("#sat").on("click", function() {
