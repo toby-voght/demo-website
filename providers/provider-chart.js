@@ -1,5 +1,7 @@
+// Taking the original code had to replace the "dummy.json" with the "provider.json" to get correct chart
 
-d3.json("dummy.json", function(error, data) {
+
+d3.json("provider.json", function(error, data) {
   if (error) throw error;
   //sort bars based on value
   data = data.sort(function (a, b) {
