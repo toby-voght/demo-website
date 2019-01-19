@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+  <title>Visualize NYC WiFi</title>
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/schools.css" rel="stylesheet">
+  <link href="css/non-responsive.css" rel="stylesheet">
+  </head>
+
+  <body>
+  <!-- Fixed navbar -->
+    <div class="container">
+      <header>
+        <aside>
+          Visualize New York WiFi
+        </aside>
+        <link rel='stylesheet' type='text/css' href='styles/navbar.css' title='style'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+      </header>
+
+      <h1>Explore NYC WiFi</h1>
+      <p class="lead">Play around with our interactive map. Filler text.</p>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span id="groupby">School</span><span class="caret pull-right"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li id="none"><a title = "Reset" href="javascript:;">None</a></li>
+          <li id="cluster"><a title="Schools grouped into three clusters based on a combination of high, medium, or low graduation rates, Regents passigng scores, and SAT scores." href="javascript:;">Cluster</a></li>
+          <li id="gradrate"><a title = "The percentage of students enrolled in 4 years of high school who are graduating" href="javascript:;">Graduation Rate</a></li>
+          <li id="grade"><a title = "The grade assigned to the school by the Department of Education School Progress Report" href="javascript:;">Grade</a></li>
+          <li id="regents"><a title = "The percent of students passing the Regents examinations"href="javascript:;">Regent Score</a></li>
+          <li id="sat"><a title = "The average composite SAT score" href="javascript:;">SAT Scores</a></li>
+        </ul>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span id="environment">Environment</span><span class="caret pull-right">
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li id="mapnone"><a title = "Reset" href="javascript:;">None</a></li>
+          <li id="mapgraffiti"><a title = "Number of reported graffiti incidents" href="javascript:;">Graffiti</a></li>
+          <li id="mapnoise"><a title = "Number of reported noise complaints" href="javascript:;">Noise Complaints</a></li>
+          <li id="mapassistance"><a title = "Level of people living on public assistance" href="javascript:;">Public Assistance</a></li>
+          <li id="mapattendance"><a title = "Total percentage of student attendance" href="javascript:;">School Attendance</a></li>
+          <li id="mapenrollment"><a title = "Number of students attending schools in this district" href="javascript:;">School Enrollment</a></li>
+        </ul>
+      </div>
+      <div id="overlay"></div>
+      <div id="map"></div>
+    </div>
+    
+
+    <script src="lib/jquery/jquery-1.10.2.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/d3/d3.v3.min.js"></script>
+    <script src="js/map.js"></script>
+  </body>
+</html>
