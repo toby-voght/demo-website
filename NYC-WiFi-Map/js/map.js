@@ -30,12 +30,26 @@ var schLow = "#FF2C00",
     schHigh = "green",
     schNa = "gray";
 
-var schLegendData = [
-                     { "label": "High", "color": schHigh },
-                     { "label": "Medium", "color": schMed },
-                     { "label": "Low", "color": schLow },
+var schLegendData1 = [
+                     { "label": "2018", "color": schHigh },
+                     { "label": "2017", "color": schMed },
+                     { "label": "2016", "color": schLow },
                      { "label": "N/A", "color": schNa }
                     ];
+
+var schLegendData2 = [
+                     { "label": "LinkNYC - Citybridge", "color": schHigh },
+                     { "label": "SPECTRUM", "color": schMed },
+                     { "label": "Transit Wireless", "color": schLow },
+                     { "label": "N/A", "color": schNa }
+                    ];
+
+var schLegendData3 = [
+                     { "label": "Free", "color": schHigh },
+                     { "label": "Limited Free", "color": schLow },
+                     { "label": "N/A", "color": schNa }
+                    ];
+
 
 /**
  * Make map SVGs
@@ -152,14 +166,17 @@ d3.select("#none").on("click", function() {
 });
 
 d3.select("#gradrate").on("click", function() {
+    removeLegend("schLegend");
     colorSchools('Graduation Rate', 'GRADRATE');
 });
 
 d3.select("#grade").on("click", function() {
+    removeLegend("schLegend");
     colorSchools('Grade', 'GRADE');
 });
 
 d3.select("#sat").on("click", function() {
+    removeLegend("schLegend");
     colorSchools('Free or Limited Free', 'Free');
 });
 
@@ -171,7 +188,7 @@ function colorSchools(name, key) {
         return color(d.properties[key]);
     });
 
-    showLegend("schLegend", 20);
+    showLegend("schLegend", 20, name);
     $('#groupby').text(name);
     displayInfo();
 }
@@ -213,7 +230,7 @@ function colorEnvironment(name, key) {
             return colorDistrict(d.properties[key]);
         });
 
-    showLegend("envLegend", 130);
+    showLegend("envLegend", 130, name);
     $('#environment').text(name);
     displayInfo();
 }
@@ -308,7 +325,34 @@ svg.call(zoom)
  * District and school legend functions
  */
 
-function showLegend(className, xOffset) {
+function changeLegend(variable) {
+    if (variable == 'Year') {
+        var schLegendData = [
+                     { "label": "2018", "color": schHigh },
+                     { "label": "2017", "color": schMed },
+                     { "label": "2016", "color": schLow },
+                     { "label": "N/A", "color": schNa }
+                    ];
+    }
+    else if (variable == 'Provider') {
+        var schLegendData = [
+                     { "label": "LinkNYC - Citybridge", "color": schHigh },
+                     { "label": "SPECTRUM", "color": schMed },
+                     { "label": "Transit Wireless", "color": schLow },
+                     { "label": "Other", "color": schNa }
+                    ];
+    }
+    else if(variable == 'Free') {
+        var schLegendData = [
+                     { "label": "Free", "color": schHigh },
+                     { "label": "SPECTRUM", "color": schMed },
+                     { "label": "Limited Free", "color": schLow },
+                     { "label": "N/A", "color": schNa }
+                    ];
+    }
+}
+
+function showLegend(className, xOffset, name) {
     var yOffset = 175;
     // TODO: if-else's in here a little messy
     if (className == "envLegend") {
@@ -316,8 +360,18 @@ function showLegend(className, xOffset) {
         var title = "Environment";
         var textOffset = 66;
     }
-    else {
-        var data = schLegendData;
+    else if (name =='Graduation Rate'){
+        var data = schLegendData1;
+        var title = "School";
+        var textOffset = 30;
+    }
+    else if (name =='Grade'){
+        var data = schLegendData2;
+        var title = "School";
+        var textOffset = 30;
+    }
+    else if (name =='Free or Limited Free'){
+        var data = schLegendData3;
         var title = "School";
         var textOffset = 30;
     }
