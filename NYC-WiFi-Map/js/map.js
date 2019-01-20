@@ -87,20 +87,21 @@ var messageMap = {};
 d3.csv('resource/messages.csv', function(rows) {
     rows.forEach(function(value, index) {
         var environment = value.Environment;
-        if (!messageMap[value.School]) {
-            messageMap[value.School] = {};
+        console.log(value.WiFi)
+        if (!messageMap[value.WiFi]) {
+            messageMap[value.WiFi] = {};
         }
-        messageMap[value.School][environment] = value.Message;
+        messageMap[value.WiFi][environment] = value.Message;
     });
     displayInfo();
 });
 
 function displayInfo() {
-    var school = wfToKey().trim();
+    var WiFi = wfToKey().trim();
     var environment = envToKey().trim();
 
-    if (messageMap[school] && messageMap[school][environment])
-        $("#overlay").html(messageMap[school][environment]);
+    if (messageMap[WiFi] && messageMap[WiFi][environment])
+        $("#overlay").html(messageMap[WiFi][environment]);
     else
         $("#overlay").html('Try some combinations!');
 }
