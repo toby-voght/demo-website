@@ -1,6 +1,7 @@
 /**
- * Visualize NYC schools D3 map.
- * Authors: Hannah Keiler, Jeremy Myers, George Tsai, Stephen Zhou
+ * Visualize NYC WiFi Map
+ * Authors: Toby Voght
+ * Source Code: https://github.com/stepzhou/visualize-nyc-schools
  */
 
 /**
@@ -11,7 +12,7 @@ var width = 960,
     centered;
 
 /**
- * District and school legend color mappings
+ * District and WiFi legend color mappings
  */
 var envLow = "#B0E2FF",
     envMed = "#5CACEE",
@@ -25,32 +26,32 @@ var envLegendData = [
                      { "label": "N/A", "color": envNa }
                     ];
 
-var schLow = "#FF2C00",
-    schMed = "#FFDE00",
-    schHigh = "green",
-    schNa = "gray";
+var wfRed = "#FF2C00",
+    wfYell = "#FFDE00",
+    wfGreen = "green",
+    wfGray = "gray";
 
 var goodData = 5
     nulldata = 1
 
-var schLegendData1 = [
-                     { "label": "2018", "color": schHigh },
-                     { "label": "2017", "color": schMed },
-                     { "label": "2016", "color": schLow },
-                     { "label": "Bad Data", "color": schNa }
+var wfLegendData1 = [
+                     { "label": "2018", "color": wfGreen },
+                     { "label": "2017", "color": wfYell },
+                     { "label": "2016", "color": wfRed },
+                     { "label": "Bad Data", "color": wfGray }
                     ];
 
-var schLegendData2 = [
-                     { "label": "LinkNYC - Citybridge", "color": schHigh },
-                     { "label": "SPECTRUM", "color": schMed },
-                     { "label": "Transit Wireless", "color": schLow },
-                     { "label": "Other", "color": schNa }
+var wfLegendData2 = [
+                     { "label": "LinkNYC - Citybridge", "color": wfGreen },
+                     { "label": "SPECTRUM", "color": wfYell },
+                     { "label": "Transit Wireless", "color": wfRed },
+                     { "label": "Other", "color": wfGray }
                     ];
 
-var schLegendData3 = [
-                     { "label": "Free", "color": schHigh },
-                     { "label": "Limited Free", "color": schLow },
-                     { "label": "Other", "color": schNa }
+var wfLegendData3 = [
+                     { "label": "Free", "color": wfGreen },
+                     { "label": "Limited Free", "color": wfRed },
+                     { "label": "Other", "color": wfGray }
                     ];
 
 
@@ -95,7 +96,7 @@ d3.csv('resource/messages.csv', function(rows) {
 });
 
 function displayInfo() {
-    var school = schoolToKey().trim();
+    var school = wfToKey().trim();
     var environment = envToKey().trim();
 
     if (messageMap[school] && messageMap[school][environment])
@@ -104,14 +105,15 @@ function displayInfo() {
         $("#overlay").html('Try some combinations!');
 }
 
+
 // Converting category names to csv key name
-function schoolToKey() {
-    var schoolName = $("#groupby").text().trim();
-    if (schoolName == "Graduation Rate")
-        return "gradrate";
-    if (schoolName == "Grade")
-        return "grade";
-    if (schoolName == "Free or Limited Free")
+function wfToKey() {
+    var wfName = $("#groupby").text().trim();
+    if (wfName == "Establishment Year")
+        return "date";
+    if (wfName == "Provider")
+        return "provider";
+    if (wfName == "Free or Limited Free")
         return "free";
     return "";
 }
@@ -133,18 +135,18 @@ function envToKey() {
 }
 
 /**
- * School and district dropdown coloring functions
+ * WiFi and district dropdown coloring functions
  */
 
 function color(property) {
   if (property == "LOW" || property == "Transit Wireless")
-    { return schLow; }
+    { return wfRed; }
   else if (property == "MED" || property == "SPECTRUM")
-    { return schMed; }
+    { return wfYell; }
   else if (property == "HIGH" || property == "LinkNYC - Citybridge")
-    { return schHigh; }
+    { return wfGreen; }
   else
-    return schNa;
+    return wfGray;
 }
 
 function size(property) {
@@ -155,7 +157,7 @@ function size(property) {
   else if (property == "HIGH" || property == "LinkNYC - Citybridge")
     { return goodData; }
   else
-    return nulldata;
+    {return nulldata; }
 }
 
 function colorDistrict(property) {
@@ -169,57 +171,57 @@ function colorDistrict(property) {
     return envNa;
 }
 
-// School factors
+// WiFi factors
 d3.select("#none").on("click", function() {
     d3.selectAll("circle")
         .style("fill", "blue")
     d3.selectAll("#school")
         .attr("r", 5)
-    removeLegend("schLegend");
+    removeLegend("wfLegend");
     $('#groupby').text('School');
     displayInfo();
 });
 
-d3.select("#gradrate").on("click", function() {
-    removeLegend("schLegend");
-    colorSchools('Graduation Rate', 'GRADRATE')
-    sizeWiFi('Graduation Rate', 'GRADRATE');
+d3.select("#date").on("click", function() {
+    removeLegend("wfLegend");
+    colorWiFi('Establishment Year', 'ACTIVATED')
+    sizeWiFi('Establishment Year', 'ACTIVATED');
 });
 
-d3.select("#grade").on("click", function() {
-    removeLegend("schLegend");
-    colorSchools('Grade', 'GRADE');
-    sizeWiFi('Grade', 'GRADE')
+d3.select("#provider").on("click", function() {
+    removeLegend("wfLegend");
+    colorWiFi('Provider', 'PROVIDER');
+    sizeWiFi('Provider', 'PROVIDER')
 });
 
-d3.select("#sat").on("click", function() {
-    removeLegend("schLegend");
-    colorSchools('Free or Limited Free', 'Free');
+d3.select("#free").on("click", function() {
+    removeLegend("wfLegend");
+    colorWiFi('Free or Limited Free', 'Free');
     sizeWiFi('Free or Limited Free', 'Free')
 });
 
-function colorSchools(name, key) {
-    removeLegend('schLegend');
+function colorWiFi(name, key) {
+    removeLegend('wfLegend');
 
     d3.selectAll("#school")
         .style("fill", function(d) {
         return color(d.properties[key]);
     });
 
-    showLegend("schLegend", 20, name);
+    showLegend("wfLegend", 20, name);
     $('#groupby').text(name);
     displayInfo();
 }
 
 function sizeWiFi(name, key) {
-    removeLegend('schLegend');
+    removeLegend('wfLegend');
 
     d3.selectAll("#school")
         .attr("r", function(d) {
         return size(d.properties[key]);
     });
 
-    showLegend("schLegend", 20, name);
+    showLegend("wfLegend", 20, name);
     $('#groupby').text(name);
     displayInfo()
 }
@@ -267,7 +269,7 @@ function colorEnvironment(name, key) {
 }
 
 /**
- * Actually plotting school districts and schools
+ * Actually plotting school districts and wifi hotspots
  */
 
 function plotSchoolDistricts() {
@@ -279,7 +281,7 @@ function plotSchoolDistricts() {
             .attr("class", function(d){ return d.properties.SchoolDist; })
             .attr("d", path);
 
-        plotSchools();
+        plotWiFi();
     });
 }
 
@@ -289,14 +291,14 @@ function toTitleCase(str)
 }
 
 var circle_r = 5;
-function plotSchools() {
+function plotWiFi() {
     d3.json("json/Clean_NYC_WiFi.json", function(error, school) {
         var mouseDuration = 150;
         smap.selectAll(".school")
             .data(school.features)
             .enter().append("circle")
             .attr("id", "school")
-            .attr("class", function(d) { return d.properties.SCHOOLNAME; })
+            .attr("class", function(d) { return d.properties.WiFiNAME; })
             .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
             .attr("r", circle_r)
             .attr("stroke-width", 0)
@@ -311,17 +313,17 @@ function plotSchools() {
                 .style("fill", "#8DB6CD")
                 .style("height", "90px");
 
-                var toolText = toTitleCase(d.properties.SCHOOLNAME)
+                var toolText = toTitleCase(d.properties.WiFiNAME)
                 if (d.properties.TYPE_WiFi != "<NA>" && d.properties.TYPE_WiFi != "null" && d.properties.TYPE_WiFi != "NaN") {
                     toolText += "<br /> This WiFi hotspot is " + d.properties.TYPE_WiFi; 
                 }
-                if (d.properties.GRADE != "<NA>" && d.properties.GRADE != "null" && d.properties.GRADE != "NaN") {
-                    toolText += "<br /> Provider is " + d.properties.GRADE;
+                if (d.properties.PROVIDER != "<NA>" && d.properties.PROVIDER != "null" && d.properties.PROVIDER != "NaN") {
+                    toolText += "<br /> Provider is " + d.properties.PROVIDER;
                 }
-                if (d.properties.GRAD_RAW == "Indoor" || d.properties.GRAD_RAW == "Library") {
+                if (d.properties.INOUT == "Indoor" || d.properties.INOUT == "Library" || d.properties.INOUT == "Subway Station") {
                     toolText += "<br /> The hotspot is indoors";
                 }
-                if (d.properties.GRAD_RAW == "Outdoor" || d.properties.GRAD_RAW == "Outdoor Kiosk") {
+                if (d.properties.INOUT == "Outdoor" || d.properties.INOUT == "Outdoor Kiosk") {
                     toolText += "<br /> The hotspot is outdoors"
                 }
 
@@ -353,7 +355,7 @@ var zoom = d3.behavior.zoom()
 svg.call(zoom)
 
 /**
- * District and school legend functions
+ * District and WiFi legend functions
  */
 
 
@@ -365,19 +367,19 @@ function showLegend(className, xOffset, name) {
         var title = "Environment";
         var textOffset = 66;
     }
-    else if (name =='Graduation Rate'){
-        var data = schLegendData1;
-        var title = "School";
+    else if (name =='Establishment Year'){
+        var data = wfLegendData1;
+        var title = "Hotspot";
         var textOffset = 30;
     }
-    else if (name =='Grade'){
-        var data = schLegendData2;
-        var title = "School";
+    else if (name =='Provider'){
+        var data = wfLegendData2;
+        var title = "Hotspot";
         var textOffset = 30;
     }
     else if (name =='Free or Limited Free'){
-        var data = schLegendData3;
-        var title = "School";
+        var data = wfLegendData3;
+        var title = "Hotspot";
         var textOffset = 30;
     }
 
