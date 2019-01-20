@@ -30,12 +30,29 @@ var schLow = "#FF2C00",
     schHigh = "green",
     schNa = "gray";
 
-var schLegendData = [
-                     { "label": "High", "color": schHigh },
-                     { "label": "Medium", "color": schMed },
-                     { "label": "Low", "color": schLow },
-                     { "label": "N/A", "color": schNa }
+var goodData = 5
+    nulldata = 1
+
+var schLegendData1 = [
+                     { "label": "2018", "color": schHigh },
+                     { "label": "2017", "color": schMed },
+                     { "label": "2016", "color": schLow },
+                     { "label": "Bad Data", "color": schNa }
                     ];
+
+var schLegendData2 = [
+                     { "label": "LinkNYC - Citybridge", "color": schHigh },
+                     { "label": "SPECTRUM", "color": schMed },
+                     { "label": "Transit Wireless", "color": schLow },
+                     { "label": "Other", "color": schNa }
+                    ];
+
+var schLegendData3 = [
+                     { "label": "Free", "color": schHigh },
+                     { "label": "Limited Free", "color": schLow },
+                     { "label": "Other", "color": schNa }
+                    ];
+
 
 /**
  * Make map SVGs
@@ -130,6 +147,17 @@ function color(property) {
     return schNa;
 }
 
+function size(property) {
+  if (property == "LOW" || property == "Transit Wireless")
+    { return goodData; }
+  else if (property == "MED" || property == "SPECTRUM")
+    { return goodData; }
+  else if (property == "HIGH" || property == "LinkNYC - Citybridge")
+    { return goodData; }
+  else
+    return nulldata;
+}
+
 function colorDistrict(property) {
   if (property == "LOW") 
     { return envLow; }
@@ -144,23 +172,30 @@ function colorDistrict(property) {
 // School factors
 d3.select("#none").on("click", function() {
     d3.selectAll("circle")
-        .style("fill", "blue");
-
+        .style("fill", "blue")
+    d3.selectAll("#school")
+        .attr("r", 5)
     removeLegend("schLegend");
     $('#groupby').text('School');
     displayInfo();
 });
 
 d3.select("#gradrate").on("click", function() {
-    colorSchools('Graduation Rate', 'GRADRATE');
+    removeLegend("schLegend");
+    colorSchools('Graduation Rate', 'GRADRATE')
+    sizeWiFi('Graduation Rate', 'GRADRATE');
 });
 
 d3.select("#grade").on("click", function() {
+    removeLegend("schLegend");
     colorSchools('Grade', 'GRADE');
+    sizeWiFi('Grade', 'GRADE')
 });
 
 d3.select("#sat").on("click", function() {
+    removeLegend("schLegend");
     colorSchools('Free or Limited Free', 'Free');
+    sizeWiFi('Free or Limited Free', 'Free')
 });
 
 function colorSchools(name, key) {
@@ -171,9 +206,22 @@ function colorSchools(name, key) {
         return color(d.properties[key]);
     });
 
-    showLegend("schLegend", 20);
+    showLegend("schLegend", 20, name);
     $('#groupby').text(name);
     displayInfo();
+}
+
+function sizeWiFi(name, key) {
+    removeLegend('schLegend');
+
+    d3.selectAll("#school")
+        .attr("r", function(d) {
+        return size(d.properties[key]);
+    });
+
+    showLegend("schLegend", 20, name);
+    $('#groupby').text(name);
+    displayInfo()
 }
 
 // Environment factors
@@ -213,7 +261,7 @@ function colorEnvironment(name, key) {
             return colorDistrict(d.properties[key]);
         });
 
-    showLegend("envLegend", 130);
+    showLegend("envLegend", 130, name);
     $('#environment').text(name);
     displayInfo();
 }
@@ -308,7 +356,8 @@ svg.call(zoom)
  * District and school legend functions
  */
 
-function showLegend(className, xOffset) {
+
+function showLegend(className, xOffset, name) {
     var yOffset = 175;
     // TODO: if-else's in here a little messy
     if (className == "envLegend") {
@@ -316,8 +365,18 @@ function showLegend(className, xOffset) {
         var title = "Environment";
         var textOffset = 66;
     }
-    else {
-        var data = schLegendData;
+    else if (name =='Graduation Rate'){
+        var data = schLegendData1;
+        var title = "School";
+        var textOffset = 30;
+    }
+    else if (name =='Grade'){
+        var data = schLegendData2;
+        var title = "School";
+        var textOffset = 30;
+    }
+    else if (name =='Free or Limited Free'){
+        var data = schLegendData3;
         var title = "School";
         var textOffset = 30;
     }
