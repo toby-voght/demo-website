@@ -11,16 +11,18 @@
   </head>
 
 <body>
-  
+<!--Loading the appropriate styles-->
 <div id="navbar">
-  <a href="index.html">Home</a>
-  <a href="googlemap/index.html">WiFi Table</a>
-  <a href="newviz.html">WiFi by Burough</a>
-  <a href="map.html">WiFi Map</a>
-</div>
+  <a href="index.html">Home |</a>
+  <a href="googlemap/index.html">| Google Map |</a>
+  <a href="newviz.html">| by Burough |</a>
+  <a href="NYC-WiFi-Map/map.html">| Map by School District |</a>
+  <a href="providers/provider-chart.html">| by Provider |</a>
+</div></div>
    
       <h1>NYC WiFi by School District</h1>
       <p class="lead">Play around with our interactive map.</p>
+      <!--Creating the buttons and button functions-->
       <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
           <span id="groupby">WiFi</span><span class="caret pull-right"></span>
@@ -45,15 +47,40 @@
           <li id="mapenrollment"><a title = "Number of students attending schools in this district" href="javascript:;">School Enrollment</a></li>
         </ul>
       </div>
+      <!--Creating the map-->
       <div id="overlay"></div>
       <div id="map"></div>
     </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
-    
+    <p>This visualization is a jumping off point for the correlation between WiFi and infrastructure with school district performance.  Here are the variables:</p>
 
+    <h2>Hotspots:</h2>
+    <ol>
+      <li>Establishment Date: This is an overlay of hotspots in NYC by activation date (sorted by year). Hotspots with unreliable activation data have been minimized.</li>
+      <li>Provider: This is an overlay of the top three public WiFi providers in NYC.  Hotspots serviced by other providers have been minimized.</li>
+      <li>Free or Limited Free: This is an overlay of all the free and limited free hotspots in NYC.</li>
+    </ol>
+
+    <h2>School Districts</h2>
+    <ol>
+      <li>Graffiti: Districts are sorted by the number of reported graffiti incidents.</li>
+      <li>Noise Complaints: Districts are sorted by the number of reported noise complaints.</li>
+      <li>Public Assistance: Districts are sorted by the level of people living on public assistance.</li>
+      <li>School Attendance: Districts are sorted by total percentage of student attendance.</li>
+      <li>School Enrollment: Districts are sorted by the number of students attending schools in this district.</li>
+    </ol>
+
+    <hr>
+
+    <p>We hope this data comparison will be an inspiration into further research between the correlations between investing in technology and educational outcomes!</p>
+
+    <a href="https://github.com/stepzhou/visualize-nyc-schools/blob/master/js/map.js">Source d3 visualization</a>
+    
+    <!--Loading scripts-->
     <script src="lib/jquery/jquery-1.10.2.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/d3/d3.v3.min.js"></script>
     <script src="js/map.js"></script>
+    <script type='text/javascript' src='js/navmenu.js'></script>
   </body>
 </html>

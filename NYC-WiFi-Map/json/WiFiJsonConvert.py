@@ -1,3 +1,4 @@
+#A program to convert the WiFi csv to a json format that could be read into the map
 #Read WiFi.csv
 import json
 import csv

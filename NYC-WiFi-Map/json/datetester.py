@@ -1,3 +1,4 @@
+#This is a program I created to experiment with sorting date/time sorting
 from datetime import datetime
 
 first = "2017-03-11"

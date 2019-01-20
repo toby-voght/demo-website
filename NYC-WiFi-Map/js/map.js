@@ -2,6 +2,7 @@
  * Visualize NYC WiFi Map
  * Authors: Toby Voght
  * Source Code: https://github.com/stepzhou/visualize-nyc-schools
+ * Edited to deal with a different source data code and add numerous features.  Also shifted variable names to reflect the new data set, where possible.
  */
 
 /**
@@ -13,6 +14,7 @@ var width = 960,
 
 /**
  * District and WiFi legend color mappings
+ * Edited existing codes to add a feature that adjusts legend dependent on dropdown selection
  */
 var envLow = "#B0E2FF",
     envMed = "#5CACEE",
@@ -80,7 +82,7 @@ var smap = svg.append("g");
 plotSchoolDistricts();
 
 /**
- * School information text field functions
+ * Tried to use the existing architechture to call a chart description from messages.csv, no luck
  */
 
 var messageMap = {};
@@ -137,6 +139,7 @@ function envToKey() {
 
 /**
  * WiFi and district dropdown coloring functions
+ * Added a function to shrink hotspots with bad or insufficient data
  */
 
 function color(property) {

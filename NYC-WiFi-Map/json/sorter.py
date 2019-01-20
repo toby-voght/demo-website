@@ -1,4 +1,4 @@
-#A program I created to compile and quantify unique entries
+#A program I created to compile and quantify unique entries, and to get some guidance for what might be useful visualizations
 
 #Read CSV
 from pprint import pprint
