@@ -30,24 +30,27 @@ var schLow = "#FF2C00",
     schHigh = "green",
     schNa = "gray";
 
+var goodData = 5
+    nulldata = 1
+
 var schLegendData1 = [
                      { "label": "2018", "color": schHigh },
                      { "label": "2017", "color": schMed },
                      { "label": "2016", "color": schLow },
-                     { "label": "N/A", "color": schNa }
+                     { "label": "Bad Data", "color": schNa }
                     ];
 
 var schLegendData2 = [
                      { "label": "LinkNYC - Citybridge", "color": schHigh },
                      { "label": "SPECTRUM", "color": schMed },
                      { "label": "Transit Wireless", "color": schLow },
-                     { "label": "N/A", "color": schNa }
+                     { "label": "Other", "color": schNa }
                     ];
 
 var schLegendData3 = [
                      { "label": "Free", "color": schHigh },
                      { "label": "Limited Free", "color": schLow },
-                     { "label": "N/A", "color": schNa }
+                     { "label": "Other", "color": schNa }
                     ];
 
 
@@ -144,6 +147,17 @@ function color(property) {
     return schNa;
 }
 
+function size(property) {
+  if (property == "LOW" || property == "Transit Wireless")
+    { return goodData; }
+  else if (property == "MED" || property == "SPECTRUM")
+    { return goodData; }
+  else if (property == "HIGH" || property == "LinkNYC - Citybridge")
+    { return goodData; }
+  else
+    return nulldata;
+}
+
 function colorDistrict(property) {
   if (property == "LOW") 
     { return envLow; }
@@ -158,8 +172,9 @@ function colorDistrict(property) {
 // School factors
 d3.select("#none").on("click", function() {
     d3.selectAll("circle")
-        .style("fill", "blue");
-
+        .style("fill", "blue")
+    d3.selectAll("#school")
+        .attr("r", 5)
     removeLegend("schLegend");
     $('#groupby').text('School');
     displayInfo();
@@ -167,17 +182,20 @@ d3.select("#none").on("click", function() {
 
 d3.select("#gradrate").on("click", function() {
     removeLegend("schLegend");
-    colorSchools('Graduation Rate', 'GRADRATE');
+    colorSchools('Graduation Rate', 'GRADRATE')
+    sizeWiFi('Graduation Rate', 'GRADRATE');
 });
 
 d3.select("#grade").on("click", function() {
     removeLegend("schLegend");
     colorSchools('Grade', 'GRADE');
+    sizeWiFi('Grade', 'GRADE')
 });
 
 d3.select("#sat").on("click", function() {
     removeLegend("schLegend");
     colorSchools('Free or Limited Free', 'Free');
+    sizeWiFi('Free or Limited Free', 'Free')
 });
 
 function colorSchools(name, key) {
@@ -191,6 +209,19 @@ function colorSchools(name, key) {
     showLegend("schLegend", 20, name);
     $('#groupby').text(name);
     displayInfo();
+}
+
+function sizeWiFi(name, key) {
+    removeLegend('schLegend');
+
+    d3.selectAll("#school")
+        .attr("r", function(d) {
+        return size(d.properties[key]);
+    });
+
+    showLegend("schLegend", 20, name);
+    $('#groupby').text(name);
+    displayInfo()
 }
 
 // Environment factors
@@ -325,32 +356,6 @@ svg.call(zoom)
  * District and school legend functions
  */
 
-function changeLegend(variable) {
-    if (variable == 'Year') {
-        var schLegendData = [
-                     { "label": "2018", "color": schHigh },
-                     { "label": "2017", "color": schMed },
-                     { "label": "2016", "color": schLow },
-                     { "label": "N/A", "color": schNa }
-                    ];
-    }
-    else if (variable == 'Provider') {
-        var schLegendData = [
-                     { "label": "LinkNYC - Citybridge", "color": schHigh },
-                     { "label": "SPECTRUM", "color": schMed },
-                     { "label": "Transit Wireless", "color": schLow },
-                     { "label": "Other", "color": schNa }
-                    ];
-    }
-    else if(variable == 'Free') {
-        var schLegendData = [
-                     { "label": "Free", "color": schHigh },
-                     { "label": "SPECTRUM", "color": schMed },
-                     { "label": "Limited Free", "color": schLow },
-                     { "label": "N/A", "color": schNa }
-                    ];
-    }
-}
 
 function showLegend(className, xOffset, name) {
     var yOffset = 175;
